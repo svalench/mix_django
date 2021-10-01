@@ -4,6 +4,9 @@ from django.utils.html import format_html
 from catalog.models import FirstCategory, SecondCategory
 
 
+class ChildCatInline(admin.TabularInline):
+    model = SecondCategory
+
 class FirstCategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'image_', 'img', 'date_upd', 'date_add')
     list_display_links = ('id', 'img', 'date_upd')
@@ -11,6 +14,7 @@ class FirstCategoryAdmin(admin.ModelAdmin):
     list_editable = ('name',)
     readonly_fields = ('image_',)
     list_filter = ('date_add', 'date_upd')
+    inlines = [ChildCatInline]
     list_per_page = 50
 
     def image_(self, obj):
