@@ -1,5 +1,7 @@
 from django.db import models
 
+from catalog.models import SecondCategory
+
 
 class BaseModel(models.Model):
     """Базовая модель для сущностей"""
@@ -91,6 +93,7 @@ class CardProduct(BaseModel):
     """модель карточки товара"""
     img = models.ImageField('картинка', default='/img/noimg.png', blank=True)
     filters = models.ManyToManyField(FiltersValue, related_name='product', blank=True, null=True)
+    category = models.ForeignKey(SecondCategory, related_name='category', on_delete=models.SET_NULL, blank=True, null=True)
     class Meta:
         verbose_name = 'Карточка продукта'
         verbose_name_plural = 'Карточки продукта'
