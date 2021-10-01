@@ -8,7 +8,7 @@ from product.models import Product, Characteristics, CharacteristicValue, Units
 
 
 def parse_data_from_1s():
-    xls = pd.ExcelFile(r"C:\Users\алексадр\PycharmProjects\mix_django\media\base.xls")
+    xls = pd.ExcelFile(r"/var/www/www-root/data/www/api.mixenerdgy.by/back/mix_django/media/base.xls")
     sheetX = xls.parse(1)
     print(sheetX)
     print(sheetX['Артикул'])
@@ -19,7 +19,7 @@ def parse_data_from_1s():
             pr.save()
 
 def parse_data_weight():
-    xls = pd.ExcelFile(r"C:\Users\алексадр\PycharmProjects\mix_django\media\base.xls")
+    xls = pd.ExcelFile(r"/var/www/www-root/data/www/api.mixenerdgy.by/back/mix_django/media/base.xls")
     sheetX = xls.parse(3)
     print(sheetX)
     for key, i in pd.DataFrame(sheetX).iterrows():
@@ -32,7 +32,7 @@ def parse_data_weight():
 
 # from mix_django.parse_xml import *
 def parse_data_characteristics():
-    xls = pd.ExcelFile(r"C:\Users\алексадр\PycharmProjects\mix_django\media\bas2.xls")
+    xls = pd.ExcelFile(r"/var/www/www-root/data/www/api.mixenerdgy.by/back/mix_django/media/bas2.xls")
     sheetX = xls.parse(1)
     print(sheetX)
     for key, i in pd.DataFrame(sheetX).iterrows():
