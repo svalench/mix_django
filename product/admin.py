@@ -31,7 +31,7 @@ class CharacteristicValueAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'date_upd')
     search_fields = ('id', 'value')
     list_editable = ('value',)
-    list_filter = ('date_add', 'date_upd', 'units')
+    list_filter = ('date_add', 'date_upd', 'units', 'parent')
     list_per_page = 50
 
 
