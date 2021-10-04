@@ -27,7 +27,7 @@ class CharacteristicsAdmin(admin.ModelAdmin):
 
 
 class CharacteristicValueAdmin(admin.ModelAdmin):
-    list_display = ('id', 'value', 'date_upd', 'date_add')
+    list_display = ('id', 'value', 'parent', 'date_upd', 'date_add')
     list_display_links = ('id', 'date_upd')
     search_fields = ('id', 'value')
     list_editable = ('value',)
