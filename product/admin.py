@@ -103,6 +103,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('id', 'name', 'count', 'weight', 'price', 'article')
     list_editable = ('count', 'weight', 'price')
     list_filter = ('date_add', 'date_upd', 'characteristics')
+    dynamic_raw_id_fields = ('characteristics',)
     list_per_page = 50
 
 
