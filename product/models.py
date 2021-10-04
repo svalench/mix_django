@@ -45,7 +45,7 @@ class CharacteristicValue(models.Model):
     date_upd = models.DateTimeField('дата обновления', auto_now=True)
 
     def __str__(self):
-        return self.value
+        return f'{self.value}   {self.units.name}  {self.parent.name}'
 
     class Meta:
         verbose_name = 'Значение характеристики'
@@ -67,7 +67,7 @@ class FiltersValue(models.Model):
     date_upd = models.DateTimeField('дата обновления', auto_now=True)
 
     def __str__(self):
-        return f'{self.parent.name} = {self.value} {self.units.name}'
+        return f'{self.parent.name} = {self.value}  {self.units.name}  {self.parent.name}'
 
     class Meta:
         verbose_name = 'Значение фильтра'
