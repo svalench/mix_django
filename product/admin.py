@@ -45,7 +45,7 @@ class FiltersAdmin(admin.ModelAdmin):
 
 
 class FiltersValueAdmin(admin.ModelAdmin):
-    list_display = ('id', 'value', 'units', 'date_upd', 'date_add')
+    list_display = ('id', 'value', 'units', 'parent', 'date_upd', 'date_add')
     list_display_links = ('id', 'date_upd')
     search_fields = ('id', 'value')
     list_editable = ('value', 'units')
