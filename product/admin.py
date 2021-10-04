@@ -77,7 +77,7 @@ class CardProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
     list_editable = ('name',)
     list_filter = ('date_add', 'date_upd')
     readonly_fields = ('image_',)
-    dynamic_raw_id_fields  = ("filters","product")
+    dynamic_raw_id_fields  = ("filters","child")
     inlines = [ProductsImagesInline, ProductInline]
     list_per_page = 50
 

@@ -92,7 +92,7 @@ class ProductsImages(models.Model):
 class CardProduct(BaseModel):
     """модель карточки товара"""
     img = models.ImageField('картинка', default='/img/noimg.png', blank=True)
-    filters = models.ManyToManyField(FiltersValue, related_name='product', blank=True, null=True)
+    filters = models.ManyToManyField(FiltersValue, related_name='filter', blank=True, null=True)
     category = models.ForeignKey(SecondCategory, related_name='category', on_delete=models.SET_NULL, blank=True, null=True)
     class Meta:
         verbose_name = 'Карточка продукта'
