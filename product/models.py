@@ -38,9 +38,9 @@ class Characteristics(BaseModel):
 
 class CharacteristicValue(models.Model):
     """модель значений характеристик"""
-    parent = models.ForeignKey(Characteristics, related_name='charac_value', on_delete=models.CASCADE)
+    parent = models.ForeignKey(Characteristics, related_name='charac_value', on_delete=models.CASCADE, verbose_name="название характеристики")
     value = models.CharField('значение', max_length=255, db_index=True)
-    units = models.ForeignKey(Units, on_delete=models.CASCADE)
+    units = models.ForeignKey(Units, on_delete=models.CASCADE, verbose_name="единицы измерения")
     date_add = models.DateTimeField('дата добавления', auto_now_add=True)
     date_upd = models.DateTimeField('дата обновления', auto_now=True)
 
@@ -60,9 +60,9 @@ class Filters(BaseModel):
 
 class FiltersValue(models.Model):
     """модель значений фильтров"""
-    parent = models.ForeignKey(Filters, related_name='filter_value', on_delete=models.CASCADE)
+    parent = models.ForeignKey(Filters, related_name='filter_value', on_delete=models.CASCADE, verbose_name="название фильтра")
     value = models.CharField('значение', max_length=255, db_index=True)
-    units = models.ForeignKey(Units, on_delete=models.CASCADE)
+    units = models.ForeignKey(Units, on_delete=models.CASCADE, verbose_name="единицы измерения")
     date_add = models.DateTimeField('дата добавления', auto_now_add=True)
     date_upd = models.DateTimeField('дата обновления', auto_now=True)
 
@@ -77,7 +77,7 @@ class FiltersValue(models.Model):
 class ProductsImages(models.Model):
     """модель изображения продукта"""
     img = models.ImageField('картинка')
-    product = models.ForeignKey('CardProduct', related_name='images', on_delete=models.CASCADE)
+    product = models.ForeignKey('CardProduct', related_name='images', on_delete=models.CASCADE, verbose_name="продукт")
     date_add = models.DateTimeField('дата добавления', auto_now_add=True)
     date_upd = models.DateTimeField('дата обновления', auto_now=True)
 
@@ -91,21 +91,24 @@ class ProductsImages(models.Model):
 
 class CardProduct(BaseModel):
     """модель карточки товара"""
-    img = models.ImageField('картинка', default='/img/noimg.png', blank=True)
-    filters = models.ManyToManyField(FiltersValue, related_name='filter', blank=True, null=True)
-    category = models.ForeignKey(SecondCategory, related_name='category', on_delete=models.SET_NULL, blank=True, null=True)
+    img = models.ImageField( default='/img/noimg.png', blank=True, verbose_name="изображение")
+    filters = models.ManyToManyField(FiltersValue, related_name='filter', blank=True, null=True, verbose_name="фильтр")
+    category = models.ForeignKey(SecondCategory, related_name='category', on_delete=models.SET_NULL, verbose_name="категория", blank=True, null=True)
     class Meta:
         verbose_name = 'Карточка продукта'
         verbose_name_plural = 'Карточки продукта'
 
+    def related_label(self):
+        return "%s (%s)" % (self.name, self.id)
+
 
 class Product(BaseModel):
     """модель товара"""
-    parent = models.ForeignKey(CardProduct, related_name='child', on_delete=models.CASCADE, blank=True, null=True)
+    parent = models.ForeignKey(CardProduct, related_name='child', verbose_name="карточка продукта", on_delete=models.CASCADE, blank=True, null=True)
     article = models.CharField('артикль', max_length=255, db_index=True)
-    characteristics = models.ManyToManyField(CharacteristicValue, related_name='characteristic', blank=True, null=True)
+    characteristics = models.ManyToManyField(CharacteristicValue, related_name='characteristic', verbose_name="характеристики", blank=True, null=True)
     count = models.IntegerField('количество', default=0, blank=True)
-    weight = models.DecimalField('weight', null=True, default=0.0, db_index=True, blank=True,
+    weight = models.DecimalField('вес', null=True, default=0.0, db_index=True, blank=True,
                                  max_digits=12, decimal_places=2)
     price = models.DecimalField('цена', blank=True, default=0.0, max_digits=32,
                                 decimal_places=2, null=True)

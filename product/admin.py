@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
@@ -70,16 +71,38 @@ class ProductsImagesInline(admin.TabularInline):
 class ProductInline(admin.StackedInline):
     model = Product
 
+
+class CardProductAdminForm(forms.ModelForm):
+    child = forms.MultipleChoiceField(label="Продукты", required=False, choices=Product.objects.values_list('id','name'))
+    class Meta:
+        model = CardProduct
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super(CardProductAdminForm, self).__init__(*args, **kwargs)
+        self.fields["child"].initial = [o for o in self.instance.child.all().values_list('id', flat=True)]
+
+
 class CardProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
-    list_display = ('id', 'name', 'image_', 'view_filters_link', 'date_upd', 'date_add')
+    form = CardProductAdminForm
+    list_display = ('id', 'name', 'image_', 'view_filters_link', "view_produts_link", 'date_upd', 'date_add')
     list_display_links = ('id', 'date_upd')
     search_fields = ('id', 'name')
     list_editable = ('name',)
     list_filter = ('date_add', 'date_upd')
     readonly_fields = ('image_',)
-    dynamic_raw_id_fields  = ("filters","child")
+    dynamic_raw_id_fields  = ("filters", 'child')
     inlines = [ProductsImagesInline, ProductInline]
+
     list_per_page = 50
+
+    def save_model(self, request, obj, form, change):
+        if "child" in form.changed_data:
+            obj.child.clear()
+            for i in form.cleaned_data['child']:
+                p = Product.objects.filter(id=int(i)).first()
+                obj.child.add(p)
+        super().save_model(request, obj, form, change)
 
     def image_(self, obj):
         return format_html('<img width="50" height="50"  src="{}" />'.format(obj.img.url))
@@ -93,7 +116,17 @@ class CardProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
         )
         return format_html('<a href="{}">кол-во фильтров {}</a>', url, count)
 
+    def view_produts_link(self, obj):
+        count = obj.child.all().count()
+        url = (
+                reverse("admin:product_product_changelist")
+                + "?"
+                + urlencode({"parent__id": f"{obj.id}"})
+        )
+        return format_html('<a href="{}">кол-во продуктов {}</a>', url, count)
+
     view_filters_link.short_description = "Фильтра"
+    view_produts_link.short_description = "Продукты"
 
 
 
@@ -103,7 +136,11 @@ class ProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
     search_fields = ('id', 'name', 'count', 'weight', 'price', 'article')
     list_editable = ('count', 'weight', 'price')
     list_filter = ('date_add', 'date_upd', 'characteristics')
-    dynamic_raw_id_fields = ('characteristics',)
+    # dynamic_raw_id_fields = ('characteristics',)
+    raw_id_fields = ('parent', 'characteristics',)
+    related_lookup_fields = {
+        'm2m': ['parent', 'characteristics'],
+    }
     list_per_page = 50
 
 
