@@ -97,7 +97,7 @@ class CardProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
 
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
     list_display = ('id', 'name', 'article', 'count', 'weight', 'price', 'date_upd', 'date_add')
     list_display_links = ('id', 'name', 'date_upd')
     search_fields = ('id', 'name', 'count', 'weight', 'price', 'article')
