@@ -97,13 +97,14 @@ class CardProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
     list_per_page = 50
 
     def save_model(self, request, obj, form, change):
-        if "child" in form.changed_data:
+        super().save_model(request, obj, form, change)
+        if "child" in form.changed_data and len(form.cleaned_data['child'])>0:
             obj.child.clear()
             for i in form.cleaned_data['child']:
                 p = Product.objects.filter(id=int(i)).first()
                 if p:
-                    obj.child.update(p)
-        super().save_model(request, obj, form, change)
+                    obj.child.add(p)
+
 
     def image_(self, obj):
         return format_html('<img width="50" height="50"  src="{}" />'.format(obj.img.url))
