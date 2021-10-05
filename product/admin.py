@@ -102,7 +102,7 @@ class CardProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
             for i in form.cleaned_data['child']:
                 p = Product.objects.filter(id=int(i)).first()
                 if p:
-                    obj.child.add(p)
+                    obj.child.update(p)
         super().save_model(request, obj, form, change)
 
     def image_(self, obj):
