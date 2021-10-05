@@ -101,7 +101,8 @@ class CardProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
             obj.child.clear()
             for i in form.cleaned_data['child']:
                 p = Product.objects.filter(id=int(i)).first()
-                obj.child.add(p)
+                if p:
+                    obj.child.add(p)
         super().save_model(request, obj, form, change)
 
     def image_(self, obj):
@@ -136,6 +137,11 @@ class ProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
     search_fields = ('id', 'name', 'count', 'weight', 'price', 'article')
     list_editable = ('count', 'weight', 'price')
     list_filter = ('date_add', 'date_upd', 'characteristics')
+    # dynamic_raw_id_fields = ('characteristics',)
+    raw_id_fields = ('parent', 'characteristics',)
+    related_lookup_fields = {
+        'm2m': ['parent', 'characteristics'],
+    }
     list_per_page = 50
 
 
