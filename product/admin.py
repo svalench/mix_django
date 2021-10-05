@@ -136,11 +136,6 @@ class ProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
     search_fields = ('id', 'name', 'count', 'weight', 'price', 'article')
     list_editable = ('count', 'weight', 'price')
     list_filter = ('date_add', 'date_upd', 'characteristics')
-    # dynamic_raw_id_fields = ('characteristics',)
-    raw_id_fields = ('parent', 'characteristics',)
-    related_lookup_fields = {
-        'm2m': ['parent', 'characteristics'],
-    }
     list_per_page = 50
 
 
