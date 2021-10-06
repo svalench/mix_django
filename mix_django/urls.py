@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 from mix_django import settings
-from mix_django.router import router_catalog
+from mix_django.router import router_catalog, router_product
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
@@ -30,6 +30,7 @@ urlpatterns = [
     # ==============DRF route======================
     # users
     path('catalog/', include(router_catalog.urls)),
+    path('product/', include(router_product.urls)),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
