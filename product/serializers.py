@@ -32,13 +32,13 @@ class ProductSerializer(serializers.ModelSerializer):
     """сериализация модели Product """
     characteristics_norm = CharacteristicValueSerializer(source='characteristics.all', read_only=True, many=True)
     images = CardImagesSerializer(source='parent.images.all', read_only=True, many=True)
-    # img = serializers.SerializerMethodField()
+    img = serializers.SerializerMethodField()
 
     def get_img(self, obj):
         if obj.parent:
             return obj.parent.img
         else:
-            return None
+            return ''
 
     class Meta:
         model = Product
