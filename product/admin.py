@@ -133,7 +133,7 @@ class CardProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
 
 
 class ProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
-    list_display = ('id', 'name', 'article', 'count', 'weight', 'price', 'date_upd', 'date_add')
+    list_display = ('id', 'name', 'article', 'count', 'view_characteristicsV_link', 'weight', 'price', 'date_upd', 'date_add')
     list_display_links = ('id', 'name', 'date_upd')
     search_fields = ('id', 'name', 'count', 'weight', 'price', 'article')
     list_editable = ('count', 'weight', 'price')
@@ -144,6 +144,17 @@ class ProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
         'm2m': ['parent', 'characteristics'],
     }
     list_per_page = 50
+
+    def view_characteristicsV_link(self, obj):
+        count = obj.characteristics.all().count()
+        url = (
+                reverse("admin:product_characteristicvalue_changelist")
+                + "?"
+                + urlencode({"characteristic__id": f"{obj.id}"})
+        )
+        return format_html('<a href="{}">кол-во характеристик {}</a>', url, count)
+
+    view_characteristicsV_link.short_description = "Характеристики"
 
 
 admin.site.register(Units, UnitsAdmin)
