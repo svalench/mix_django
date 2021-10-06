@@ -85,7 +85,7 @@ class CardProductAdminForm(forms.ModelForm):
 
 class CardProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
     form = CardProductAdminForm
-    list_display = ('id', 'name', 'image_', 'view_filters_link', "view_produts_link", 'date_upd', 'date_add')
+    list_display = ('id', 'name', 'image_', 'view_filters_link', "view_produts_link", 'img', 'date_upd', 'date_add')
     list_display_links = ('id', 'date_upd')
     search_fields = ('id', 'name')
     list_editable = ('name',)
