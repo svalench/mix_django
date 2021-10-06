@@ -36,7 +36,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_img(self, obj):
         if obj.parent:
-            return obj.parent.img
+            return str(obj.parent.img)
         else:
             return ''
 
