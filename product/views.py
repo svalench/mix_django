@@ -21,10 +21,10 @@ def filter_cats(request):
         for ch in characteristics:
             if ch.parent in res:
                 if not ch.id in res[ch.parent]['id_list']:
-                    res[ch.parent]['values'].append({"value": ch.value, "unit": ch.units.name, 'id': ch.id})
-                    res[ch.parent]['id_list'].append(ch.id)
+                    res[ch.parent.id]['values'].append({"value": ch.value, "unit": ch.units.name, 'id': ch.id})
+                    res[ch.parent.id]['id_list'].append(ch.id)
             else:
-                res[ch.parent] = {'name': ch.parent.name,
+                res[ch.parent.id] = {'name': ch.parent.name,
                                   'id': ch.parent.id,
                                   'id_list': [ch.id],
                                   'values': [{"value": ch.value, "unit": ch.units.name, 'id': ch.id}]
