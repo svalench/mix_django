@@ -39,7 +39,7 @@ class CharacteristicValueSerializer(serializers.ModelSerializer):
 
 class CharacteristicWithValueSerializer(serializers.ModelSerializer):
     """сериализация модели Characteristics  с  CharacteristicValue"""
-    val = CharacteristicValueWithoutParentSerializer(source='characteristicvalue_set.all', read_only=True)
+    val = CharacteristicValueWithoutParentSerializer(source='charac_value.all', read_only=True, many=True)
     class Meta:
         model = Characteristics
         permission_classes = (IsAuthenticated,)
