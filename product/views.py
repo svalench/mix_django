@@ -29,5 +29,5 @@ def filter_cats(request):
                                   'id_list': [ch.id],
                                   'values': [{"value": ch.value, "unit": ch.units.name, 'id': ch.id}]
                                   }
-    data = [i for i in res]
+    data = [res[i] for i in res]
     return Response(data, status=status.HTTP_200_OK)
