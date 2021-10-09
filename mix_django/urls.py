@@ -20,12 +20,14 @@ from django.conf.urls.static import static
 
 from mix_django import settings
 from mix_django.router import router_catalog, router_product
+from product.views import filter_cats
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     url(r'^admin/dynamic_raw_id/', include('dynamic_raw_id.urls')),
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
+    path('cat/characterisitcs', filter_cats, name='filter_cats'),
 
     # ==============DRF route======================
     # users
