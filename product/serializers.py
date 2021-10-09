@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.permissions import IsAuthenticated
 
-from product.models import Product, CardProduct, Characteristics, CharacteristicValue, ProductsImages
+from product.models import Product, CardProduct, Characteristics, CharacteristicValue, ProductsImages, Units
 
 
 class CardImagesSerializer(serializers.ModelSerializer):
@@ -11,12 +11,26 @@ class CardImagesSerializer(serializers.ModelSerializer):
         permission_classes = (IsAuthenticated,)
         fields = '__all__'
 
+class UnitSerializer(serializers.ModelSerializer):
+    """сериализация модели Characteristics only"""
+    class Meta:
+        model = Units
+        permission_classes = (IsAuthenticated,)
+        fields = '__all__'
+
 class CharacteristicValueWithoutParentSerializer(serializers.ModelSerializer):
     """сериализация модели Characteristics only"""
+    unit = serializers.SerializerMethodField()
     class Meta:
         model = CharacteristicValue
         permission_classes = (IsAuthenticated,)
         fields = '__all__'
+
+    def get_unit(self, obj):
+        if obj.units:
+            return str(obj.units.name)
+        else:
+            return ''
 
 
 class CharacteristicSerializer(serializers.ModelSerializer):
