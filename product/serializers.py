@@ -11,6 +11,14 @@ class CardImagesSerializer(serializers.ModelSerializer):
         permission_classes = (IsAuthenticated,)
         fields = '__all__'
 
+class CharacteristicValueWithoutParentSerializer(serializers.ModelSerializer):
+    """сериализация модели Characteristics only"""
+    class Meta:
+        model = CharacteristicValue
+        permission_classes = (IsAuthenticated,)
+        fields = '__all__'
+
+
 class CharacteristicSerializer(serializers.ModelSerializer):
     """сериализация модели Characteristics """
     class Meta:
@@ -24,6 +32,16 @@ class CharacteristicValueSerializer(serializers.ModelSerializer):
     characterisitc = CharacteristicSerializer(source='parent', read_only=True)
     class Meta:
         model = CharacteristicValue
+        permission_classes = (IsAuthenticated,)
+        fields = '__all__'
+
+
+
+class CharacteristicWithValueSerializer(serializers.ModelSerializer):
+    """сериализация модели Characteristics  с  CharacteristicValue"""
+    val = CharacteristicValueWithoutParentSerializer(source='characteristicvalue_set.all', read_only=True)
+    class Meta:
+        model = Characteristics
         permission_classes = (IsAuthenticated,)
         fields = '__all__'
 

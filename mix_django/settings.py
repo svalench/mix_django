@@ -91,7 +91,7 @@ AUTH_USER_MODEL = 'user.User'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 print(os.environ)
-if os.environ.get('prod'):
+if os.environ.get('prod')!='':
     DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',

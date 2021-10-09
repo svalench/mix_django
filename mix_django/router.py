@@ -15,4 +15,5 @@ router_catalog.register(r'categories', categories.CategoriesListViewSet)
 
 # products
 router_product.register(r'product', products.ProductsListViewSet)
-router_product.register(r'characteristics', products.CharacteristicsByCatListViewSet)
+router_product.register(r'characteristics/values', products.CharacteristicsByCatListViewSet)
+router_product.register(r'characteristics', products.CharacteristicsListViewSet)

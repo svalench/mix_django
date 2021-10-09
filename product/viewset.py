@@ -1,5 +1,5 @@
-from product.models import Product, CharacteristicValue
-from product.serializers import ProductSerializer, CharacteristicValueSerializer
+from product.models import Product, CharacteristicValue, Characteristics
+from product.serializers import ProductSerializer, CharacteristicValueSerializer, CharacteristicWithValueSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -24,4 +24,15 @@ class CharacteristicsByCatListViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     ordering_fields = []
     filterset_fields = ['characteristic__parent__category']
+    search_fields = ['name', 'article']
+
+
+class CharacteristicsListViewSet(viewsets.ModelViewSet):
+    queryset = Characteristics.objects.all()
+    serializer_class = CharacteristicWithValueSerializer
+    http_method_names = ['get', 'head']
+    permission_classes = [permissions.AllowAny]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    ordering_fields = []
+    filterset_fields = ['charac_value__characteristic__parent__category']
     search_fields = ['name', 'article']
