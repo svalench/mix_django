@@ -19,7 +19,7 @@ def filter_cats(request):
     for product in products:
         characteristics = product.characteristics.all()
         for ch in characteristics:
-            if isinstance(res[ch.parent.id], dict):
+            if res[ch.parent.id] in res.keys():
                 if not ch.id in res[ch.parent.id]['id_list']:
                     res[ch.parent.id]['values'].append({"value": ch.value, "unit": ch.units.name, 'id': ch.id})
                     res[ch.parent.id]['id_list'].append(ch.id)
