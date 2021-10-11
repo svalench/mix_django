@@ -19,7 +19,7 @@ def filter_cats(request):
     for product in products:
         characteristics = product.characteristics.all()
         for ch in characteristics:
-            if ch.parent in res:
+            if ch.parent in res.keys():
                 if not ch.id in res[ch.parent]['id_list']:
                     res[ch.parent.id]['values'].append({"value": ch.value, "unit": ch.units.name, 'id': ch.id})
                     res[ch.parent.id]['id_list'].append(ch.id)
@@ -29,5 +29,5 @@ def filter_cats(request):
                                   'id_list': [ch.id],
                                   'values': [{"value": ch.value, "unit": ch.units.name, 'id': ch.id}]
                                   }
-    #data = [res[i] for i in res]
+    data = [res[i] for i in res]
     return Response(data, status=status.HTTP_200_OK)
