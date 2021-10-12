@@ -17,7 +17,7 @@ class ProductsListViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         queryset = Product.objects.all()
-        super(ProductsListViewSet, self).get_queryset()
+        #super(ProductsListViewSet, self).get_queryset()
         filter_values = []
         print(self.request.query_params)
         print(self.request.GET)
