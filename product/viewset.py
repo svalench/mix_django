@@ -27,7 +27,7 @@ class ProductsListViewSet(viewsets.ModelViewSet):
                 qq = Q()
                 for c in ch.charac_value.all():
                     if str(c.id) in filter_values:
-                        print(c.id, c.value)
+                        print(c.id, c.value, ch.id, ch.name)
                         qq = qq | Q(characteristics__id=c.id)
                 queryset = queryset.filter(qq)
         return queryset
