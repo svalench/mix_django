@@ -15,8 +15,9 @@ class ProductsListViewSet(viewsets.ModelViewSet):
     filterset_fields = ['parent__category', 'characteristics']
     search_fields = ['name', 'article']
 
-    def get_queryset(self):
+    def get_queryset(self, *args, **kwargs):
         queryset = Product.objects.all()
+        super(ProductsListViewSet, self).get_queryset()
         filter_values = []
         if self.request.GET.get('filter_ch'):
             if not isinstance(self.request.GET.get('filter_ch'), list):
