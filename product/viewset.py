@@ -3,6 +3,7 @@ from product.serializers import ProductSerializer, CharacteristicValueSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
 from rest_framework.filters import SearchFilter, OrderingFilter
+from django.db.models import Q
 
 
 class ProductsListViewSet(viewsets.ModelViewSet):
@@ -21,10 +22,13 @@ class ProductsListViewSet(viewsets.ModelViewSet):
         filter_values = []
         if self.request.GET.get('filter_ch'):
             filter_values = self.request.GET.get('filter_ch')
-            charac = CharacteristicValue.objects.filter(id__in=filter_values).values_list('id')
-            for ch in filter_values:
-                print(ch)
-                queryset = queryset.filter(characteristics__id=int(ch))
+            charac = Characteristics.objects.filter(charac_value__in=filter_values)
+            for ch in charac:
+                qq = Q()
+                for c in ch.charac_value.all():
+                    if c.id in filter_values:
+                        qq = qq | Q(characteristics__id=c.id)
+                queryset = queryset.filter(qq)
         return queryset
 
 
