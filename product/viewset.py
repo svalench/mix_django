@@ -19,6 +19,8 @@ class ProductsListViewSet(viewsets.ModelViewSet):
         queryset = Product.objects.all()
         super(ProductsListViewSet, self).get_queryset()
         filter_values = []
+        print(self.request.query_params)
+        print(self.request.GET)
         if self.request.GET.get('filter_ch'):
             if not isinstance(self.request.GET.get('filter_ch'), list):
                 filter_values = [self.request.GET.get('filter_ch')]
