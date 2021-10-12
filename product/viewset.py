@@ -23,6 +23,7 @@ class ProductsListViewSet(viewsets.ModelViewSet):
         if self.request.GET.get('filter_ch'):
             filter_values = self.request.query_params.get('filter_ch')
             print(filter_values)
+            print(self.request.query_params)
             charac = Characteristics.objects.filter(charac_value__id__in=filter_values)
             for ch in charac:
                 qq = Q()
