@@ -27,7 +27,7 @@ class ProductsListViewSet(viewsets.ModelViewSet):
             charac = CharacteristicValue.objects.filter(id__in=filter_values).values_list('id')
             for ch in filter_values:
                 print(ch)
-            queryset.filter(characteristics__in=charac)
+                queryset.filter(characteristics=ch)
         return queryset
 
 
