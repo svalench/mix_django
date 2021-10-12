@@ -22,10 +22,7 @@ class ProductsListViewSet(viewsets.ModelViewSet):
         print(self.request.query_params)
         print(self.request.GET)
         if self.request.GET.get('filter_ch'):
-            if not isinstance(self.request.GET.get('filter_ch'), list):
-                filter_values = [self.request.GET.get('filter_ch')]
-            else:
-                filter_values = self.request.GET.get('filter_ch')
+            filter_values = self.request.GET.get('filter_ch')
             charac = CharacteristicValue.objects.filter(id__in=filter_values).values_list('id')
             for ch in filter_values:
                 print(ch)
