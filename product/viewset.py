@@ -15,6 +15,20 @@ class ProductsListViewSet(viewsets.ModelViewSet):
     filterset_fields = ['parent__category', 'characteristics']
     search_fields = ['name', 'article']
 
+    def get_queryset(self):
+        queryset = Product.objects.all()
+        filter_values = []
+        if self.request.GET.get('filter_ch'):
+            if not isinstance(self.request.GET.get('filter_ch'), list):
+                filter_values = [self.request.GET.get('filter_ch')]
+            else:
+                filter_values = self.request.GET.get('filter_ch')
+            charac = CharacteristicValue.objects.filter(id__in=filter_values).values_list('id')
+            for ch in filter_values:
+                print(ch)
+            queryset.filter(characteristics__in=charac)
+            return queryset
+
 
 class CharacteristicsByCatListViewSet(viewsets.ModelViewSet):
     queryset = CharacteristicValue.objects.all()
