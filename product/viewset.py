@@ -21,7 +21,7 @@ class ProductsListViewSet(viewsets.ModelViewSet):
         super(ProductsListViewSet, self).get_queryset()
         filter_values = []
         if self.request.GET.get('filter_ch'):
-            filter_values = self.request.GET.get('filter_ch')
+            filter_values = self.request.query_params.get('filter_ch')
             print(filter_values)
             charac = Characteristics.objects.filter(charac_value__id__in=filter_values)
             for ch in charac:
