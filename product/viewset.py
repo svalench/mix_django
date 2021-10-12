@@ -17,16 +17,14 @@ class ProductsListViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         queryset = Product.objects.all()
-        #super(ProductsListViewSet, self).get_queryset()
+        super(ProductsListViewSet, self).get_queryset()
         filter_values = []
-        print(self.request.query_params)
-        print(self.request.GET)
         if self.request.GET.get('filter_ch'):
             filter_values = self.request.GET.get('filter_ch')
             charac = CharacteristicValue.objects.filter(id__in=filter_values).values_list('id')
             for ch in filter_values:
                 print(ch)
-                queryset.filter(characteristics=ch)
+                queryset.filter(characteristics_id=ch)
         return queryset
 
 
