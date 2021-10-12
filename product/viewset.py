@@ -25,6 +25,7 @@ class ProductsListViewSet(viewsets.ModelViewSet):
             for ch in filter_values:
                 print(ch)
                 queryset.filter(characteristics__id=ch)
+            queryset.filter(parent_id__gt=4000)
         return queryset
 
 
