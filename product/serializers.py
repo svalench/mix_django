@@ -60,11 +60,21 @@ class CharacteristicWithValueSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class CardProductAlongSerializer(serializers.ModelSerializer):
+    """класс для Получения CardProduct along"""
+
+    class Meta:
+        model = CardProduct
+        permission_classes = (IsAuthenticated,)
+        fields = '__all__'
+
+
 class ProductSerializer(serializers.ModelSerializer):
     """сериализация модели Product """
     characteristics_norm = CharacteristicValueSerializer(source='characteristics.all', read_only=True, many=True)
     images = CardImagesSerializer(source='parent.images.all', read_only=True, many=True)
     img = serializers.SerializerMethodField()
+    card = CardProductAlongSerializer(source='parent', read_only=True)
 
     def get_img(self, obj):
         if obj.parent:
