@@ -22,6 +22,7 @@ class BaseModel(models.Model):
 
 class FirstCategory(BaseModel):
     """модель главной категории"""
+    weight_in_menu = models.IntegerField('Вес меню', default=0, null=True, blank=True)
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'

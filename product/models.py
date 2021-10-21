@@ -31,6 +31,7 @@ class Units(BaseModel):
 
 class Characteristics(BaseModel):
     """Характеристика товара"""
+    weight_in_menu = models.IntegerField('Вес для сортировки', default=0, null=True, blank=True)
     class Meta:
         verbose_name = 'Характеристика'
         verbose_name_plural = 'Характеристики'
