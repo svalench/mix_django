@@ -143,7 +143,7 @@ class ProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
     related_lookup_fields = {
         'm2m': ['parent', 'characteristics'],
     }
-    list_per_page = 50
+    list_per_page = 200
 
     def view_characteristicsV_link(self, obj):
         count = obj.characteristics.all().count()
