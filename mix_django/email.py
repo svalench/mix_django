@@ -21,7 +21,7 @@ class EmailSending:
     def send_cart_email(self, cart):
         mail_subject = 'Заказ на mixenerdgy'
         print(cart)
-        self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, cart.user_email)
+        self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, cart['user_email'])
 
 
     def send_email_registration(self, user):
