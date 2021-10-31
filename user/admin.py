@@ -31,7 +31,7 @@ class UserAdmins(UserAdmin):
 
 
 class CartsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user_name', 'user_email', 'user_phone', 'date_upd', 'date_add')
+    list_display = ('id', 'user_name', 'user_email', 'user_phone', 'view_produts_link', 'date_upd', 'date_add')
     list_display_links = ('id', 'user_name', 'user_email', 'date_upd')
     search_fields = ('id', 'user_name', 'user_email', 'user_phone')
     list_filter = ('date_add', 'date_upd', 'user_email')
