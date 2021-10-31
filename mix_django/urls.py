@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 from mix_django import settings
-from mix_django.router import router_catalog, router_product
+from mix_django.router import router_catalog, router_product, router_user
 from product.views import filter_cats
 
 urlpatterns = [
@@ -31,6 +31,7 @@ urlpatterns = [
 
     # ==============DRF route======================
     # users
+    path('users/', include(router_user.urls)),
     path('catalog/', include(router_catalog.urls)),
     path('product/', include(router_product.urls)),
 
