@@ -200,7 +200,7 @@ ADMIN_REORDER = (
      'models': ('catalog.FirstCategory', 'catalog.SecondCategory')
     },
     {'app': 'user', 'label': 'Пользователи',
-     'models': ('user.User',)
+     'models': ('user.User', 'user.Carts')
     },
 )
 
