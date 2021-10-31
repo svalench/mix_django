@@ -60,18 +60,14 @@ class User(AbstractUser):
             self.img.save(f"user_{self.pk}{file_extension}", File(img))
             self.save()
 
-    def is_master(self):
-        """проверяет является ли пользователь мастером"""
-        return True if self.masterusermodel_set.all().first() else False
 
-    def master_data(self):
-        """данные пользователя если он мастер"""
-        return self.masterusermodel_set.all()
 
-    def get_user_activity_by_works(self, offset=0, limit=10):
-        """возвращает все комментарии пользователя по работам по лимиту"""
-        return self.ratingwork_set.all()[offset:limit]
+class Carts(models.Model):
+    """Корзина заказов"""
+    user_name = models.CharField('название', max_length=255, db_index=True)
+    user_email = models.CharField('почта', max_length=255, db_index=True)
+    user_phone = models.CharField('телефон', max_length=255, db_index=True)
+    date_add = models.DateTimeField('дата добавления', auto_now_add=True)
+    date_upd = models.DateTimeField('дата обновления', auto_now=True)
+    products = models.ManyToManyField(Product)
 
-    def get_user_activity_by_masters(self, offset=0, limit=10):
-        """возвращает все комментарии пользователя по мастерам"""
-        return self.ratingmaster_set.all()[offset:limit]

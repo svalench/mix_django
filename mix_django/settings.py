@@ -205,3 +205,16 @@ ADMIN_REORDER = (
 )
 
 GRAPPELLI_ADMIN_TITLE = 'MixEnergy'
+
+
+#==========================EMAIL SETTINGS==========================================================/
+
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'beautymasters.online@yandex.by'
+EMAIL_HOST_PASSWORD = '8940113Wert'
+DOMAIN = 'api.mixenerdgy.by'
+#==================================================================================================
+#==================================================================================================
