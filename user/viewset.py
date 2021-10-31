@@ -10,8 +10,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
-from user.models import User
-from user.serializer import UserSerializer, ChangePasswordSerializer, UserSerializerS
+from user.models import User, Carts
+from user.serializer import UserSerializer, ChangePasswordSerializer, UserSerializerS, CartSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -86,3 +86,13 @@ class UserAuthTokenUpdate(ObtainAuthToken):
             'email': request.user.email
         })
 
+
+class ProductsListViewSet(viewsets.ModelViewSet):
+    queryset = Carts.objects.all()
+    serializer_class = CartSerializer
+    # http_method_names = ['get', 'head']
+    permission_classes = [permissions.AllowAny]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    ordering_fields = []
+    filterset_fields = ['user_name', 'date_add', 'user_email']
+    search_fields = ['user_name', 'user_email', 'user_phone']
