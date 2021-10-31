@@ -10,6 +10,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
+from mix_django.email import EmailSending
 from user.models import User, Carts
 from user.serializer import UserSerializer, ChangePasswordSerializer, UserSerializerS, CartSerializer
 
@@ -96,3 +97,8 @@ class CartsViewSet(viewsets.ModelViewSet):
     ordering_fields = []
     filterset_fields = ['user_name', 'date_add', 'user_email']
     search_fields = ['user_name', 'user_email', 'user_phone']
+
+    def perform_create(self, serializer):
+        super(CartsViewSet, self).perform_create(serializer)
+        email = EmailSending()
+        email.send_cart_email(serializer)

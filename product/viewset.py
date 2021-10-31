@@ -57,8 +57,3 @@ class CharacteristicsListViewSet(viewsets.ModelViewSet):
     filterset_fields = ['charac_value__characteristic__parent__category']
     search_fields = ['name', 'article']
 
-
-    def perform_create(self, serializer):
-        super(CharacteristicsListViewSet, self).perform_create(serializer)
-        email = EmailSending()
-        email.send_cart_email(serializer)
