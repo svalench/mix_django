@@ -101,4 +101,4 @@ class CartsViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         super(CartsViewSet, self).perform_create(serializer)
         email = EmailSending()
-        email.send_cart_email(self.queryset)
+        email.send_cart_email(self.get_object())
