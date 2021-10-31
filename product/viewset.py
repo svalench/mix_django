@@ -1,3 +1,4 @@
+from mix_django.email import EmailSending
 from product.models import Product, CharacteristicValue, Characteristics
 from product.serializers import ProductSerializer, CharacteristicValueSerializer, CharacteristicWithValueSerializer
 from django_filters.rest_framework import DjangoFilterBackend
@@ -55,3 +56,9 @@ class CharacteristicsListViewSet(viewsets.ModelViewSet):
     ordering_fields = []
     filterset_fields = ['charac_value__characteristic__parent__category']
     search_fields = ['name', 'article']
+
+
+    def perform_create(self, serializer):
+        super(CharacteristicsListViewSet, self).perform_create(serializer)
+        email = EmailSending()
+        email.send_cart_email(serializer)

@@ -18,10 +18,10 @@ class EmailSending:
         self.current_site = DOMAIN
         self.my_email = EMAIL_HOST_USER
 
-    def send_cart_email(self, user, cart):
+    def send_cart_email(self, cart):
         mail_subject = 'Заказ на mixenerdgy'
-        data = cart
-        self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', data, user.email)
+        print(cart)
+        self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, cart.user_email)
 
 
     def send_email_registration(self, user):
@@ -52,9 +52,9 @@ class EmailSending:
             ValidationError({"detail": "Проблема отправки письма. Обратитесь к администратору."})
             return False
 
-    def send_html_email(self,  subject:str, template:str, data:dict, email:str) -> bool:
+    def send_html_email(self, subject: str, template: str, data: dict, email: str) -> bool:
 
-        text_content = 'This is an important message.'
+        text_content = 'Заказ.'
         html_content = render_to_string(template, data)
         msg = EmailMultiAlternatives(subject, text_content, self.my_email, [email])
         msg.attach_alternative(html_content, "text/html")
