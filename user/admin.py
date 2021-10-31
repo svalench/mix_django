@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext, gettext_lazy as _
-from user.models import User
+from user.models import User, Carts
 from django.utils.http import urlencode
 from django.urls import reverse
 from django.utils.html import format_html
@@ -48,4 +48,4 @@ class CartsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(User, UserAdmins)
-#admin.site.register(User, UserMoreAdmin)
+admin.site.register(Carts, CartsAdmin)
