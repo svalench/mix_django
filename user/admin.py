@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext, gettext_lazy as _
 from user.models import User
+from django.utils.http import urlencode
+from django.urls import reverse
+from django.utils.html import format_html
 
 
 class UserAdmins(UserAdmin):
@@ -26,6 +29,22 @@ class UserAdmins(UserAdmin):
         }),
     )
 
+
+class CartsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user_name', 'user_email', 'user_phone', 'date_upd', 'date_add')
+    list_display_links = ('id', 'user_name', 'user_email', 'date_upd')
+    search_fields = ('id', 'user_name', 'user_email', 'user_phone')
+    list_filter = ('date_add', 'date_upd', 'user_email')
+    list_per_page = 50
+
+    def view_produts_link(self, obj):
+        count = obj.products.all().count()
+        url = (
+                reverse("admin:product_product_changelist")
+                + "?"
+                + urlencode({"carts_set__id": f"{obj.id}"})
+        )
+        return format_html('<a href="{}">кол-во продуктов {}</a>', url, count)
 
 
 admin.site.register(User, UserAdmins)

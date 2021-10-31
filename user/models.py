@@ -1,9 +1,11 @@
 import os
 
-from django.db import models
-from django.core.files import File
 from django.contrib.auth.models import AbstractUser
+from django.core.files import File
+from django.db import models
+
 from product.models import Product
+
 
 class User(AbstractUser):
     """
