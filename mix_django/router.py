@@ -9,6 +9,7 @@ router_product = routers.DefaultRouter()
 
 
 # user
+router_user.register(r'user/cart', user.CartsViewSet)
 
 # categories
 router_catalog.register(r'categories', categories.CategoriesListViewSet)

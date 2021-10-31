@@ -87,7 +87,7 @@ class UserAuthTokenUpdate(ObtainAuthToken):
         })
 
 
-class ProductsListViewSet(viewsets.ModelViewSet):
+class CartsViewSet(viewsets.ModelViewSet):
     queryset = Carts.objects.all()
     serializer_class = CartSerializer
     # http_method_names = ['get', 'head']
