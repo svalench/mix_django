@@ -13,6 +13,7 @@ router_user.register(r'user/cart', user.CartsViewSet)
 
 # categories
 router_catalog.register(r'categories', categories.CategoriesListViewSet)
+router_catalog.register(r'categories/second', categories.CategoriesSecondListViewSet)
 router_catalog.register(r'certificates', categories.DocsCertificatesViewSet)
 
 # products
