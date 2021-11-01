@@ -7,6 +7,19 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from django.db.models import Q
 
 
+class ProductsListRandomViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    http_method_names = ['get', 'head']
+    permission_classes = [permissions.AllowAny]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    ordering_fields = []
+    filterset_fields = ['parent__category', 'characteristics']
+    search_fields = ['name', 'article']
+
+    def get_queryset(self):
+        return Product.objects.order_by('?')
+
 class ProductsListViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer

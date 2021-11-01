@@ -17,5 +17,6 @@ router_catalog.register(r'certificates', categories.DocsCertificatesViewSet)
 
 # products
 router_product.register(r'product', products.ProductsListViewSet)
+router_product.register(r'product/random', products.ProductsListRandomViewSet)
 router_product.register(r'characteristics/values', products.CharacteristicsByCatListViewSet)
 router_product.register(r'characteristics', products.CharacteristicsListViewSet)
