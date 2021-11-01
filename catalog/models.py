@@ -35,3 +35,16 @@ class SecondCategory(BaseModel):
     class Meta:
         verbose_name = 'Подкатегория'
         verbose_name_plural = 'Подкатегории'
+
+
+class DocumentsCard(models.Model):
+    """модель для сертификатов"""
+    name = models.CharField('название', max_length=255, db_index=True)
+    parent = models.ForeignKey(FirstCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    doc = models.FileField('Сертификат', upload_to='certificates', blank=True)
+    date_add = models.DateTimeField('дата добавления', auto_now_add=True)
+    date_upd = models.DateTimeField('дата обновления', auto_now=True)
+
+    class Meta:
+        verbose_name = 'Сертификат'
+        verbose_name_plural = 'Сертификаты'

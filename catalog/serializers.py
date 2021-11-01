@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from catalog.models import FirstCategory, SecondCategory
+from catalog.models import FirstCategory, SecondCategory, DocumentsCard
 
 
 class SecondCategorySerializer(serializers.ModelSerializer):
@@ -19,4 +19,11 @@ class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = FirstCategory
         permission_classes = (IsAuthenticated,)
+        fields = '__all__'
+
+
+class DocumentsCardProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DocumentsCard
+        permission_classes = (AllowAny,)
         fields = '__all__'

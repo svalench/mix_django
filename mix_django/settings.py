@@ -199,6 +199,9 @@ ADMIN_REORDER = (
     {'app': 'catalog', 'label': 'Категории',
      'models': ('catalog.FirstCategory', 'catalog.SecondCategory')
     },
+    {'app': 'catalog', 'label': 'Документы',
+     'models': ('catalog.DocumentsCard',)
+    },
     {'app': 'user', 'label': 'Пользователи',
      'models': ('user.User', 'user.Carts')
     },
