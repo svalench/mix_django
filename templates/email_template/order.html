@@ -68,7 +68,7 @@
                                     <td>
                                         <div style="height: 50px; line-height: 50px; font-size: 48px">&nbsp;</div>
                                         <div align="left">
-                                            <span style="font-family: Arial, sans-serif; font-size: 26px; line-height: 32px; color: #191919;">Здравствуйте!
+                                            <span style="font-family: Arial, sans-serif; font-size: 26px; line-height: 32px; color: #191919;">Здравствуйте! {{ user_name }}
 											</span><br />
 											<span style="font-family: Arial, sans-serif; font-size: 20px; line-height: 30px; color: #191919;">
 											Вы совершили заказ на сайте <a href="https://mixenerdgy.by/">mixenerdgy.by</a>
@@ -86,7 +86,7 @@
 
 
 {%for card in products%}
-    {{ card.id }}
+    {{ card }}
 <div style="float: left;width: 100%;margin: 0 0 10px;font-size: 15px;border-bottom: 1px solid #e2e2e2;">
 						<div style="float: left;width: 100px;height: 100px;display: flex;vertical-align: middle;justify-content: center;align-items: center;margin: 0 10px 10px 0;">
 							<img src="https://new.arhiterm.by{{card.img }}" style="max-width:100%;max-height:100%;">
@@ -113,34 +113,6 @@
 					</div>
 {%endfor%}
 
-						<div style="float: left;width: 100%;margin: 30px 0 30px;font-size: 15px;text-align: right;">
-						<div class="basket-itog-start">
-							<span style="font-size: 14px;font-weight: 600;margin: 0 5px 5px;">Товаров на :</span>
-							<strong class="basket-itog-start-strong">{{for_amount}}</strong>
-							<span style="font-size: 14px;font-weight: 600;margin: 0 0px 0px;">руб.</span>
-						</div>
-						<div class="basket-itog-start">
-							<span style="font-size: 14px;font-weight: 600;margin: 0 5px 5px;">Товаров на :</span>
-							<strong class="basket-itog-start-strong">{{for_amount}}</strong>
-							<span style="font-size: 14px;font-weight: 600;margin: 0 0px 0px;">руб.</span>
-						</div>
-						<div style="float: left;width: 100%;margin: 10px 0 10px;text-align: right;">
-							<div style="float: left;width: 100%;margin: 0px 0 10px;font-size: 13px;text-align: right;">
-								<span style="font-size: 13px;font-weight: 600;margin: 0 5px 5px;">Скидка:</span>
-								<strong style="float: none;font-size: 16px;display: inline-block;">{{for_amount_discount}}</strong>
-								<span style="font-size: 13px;font-weight: 600;margin: 0 0px 0px;">руб.</span>
-								<div style="float: right;width: 40px;">
-									<strong style="float: none;font-size: 21px;display: inline-block;">{{for_amount_discount_persent}}</strong>
-									<span style="font-size: 14px;font-weight: 600;margin: 0 0px 0px;">%</span>					
-								</div>
-							</div>
-				
-							<span style="font-size: 14px;font-weight: 600;margin: 0 5px 5px;">Итого:</span>
-							<strong style="float: none;font-size: 21px;display: inline-block;">{{for_amount_itog}}</strong>
-							<span style="font-size: 14px;font-weight: 600;margin: 0 0px 0px;">руб.</span>
-						</div>
-					</div>
-
 
             						<span style="font-size: 16px;line-height: 30px;color: #999999;margin: 0px 0 15px;float: left;width: 100%;">Данные формы заказа:</span>
     
@@ -148,30 +120,23 @@
 
 
 
-				<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">
-				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Тип плательщика</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{user_data.type_of_user}}</strong>
+
+			<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">
+				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Время заказа:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{date_add}}</strong>
+			</div>
+
+			<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">
+				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Контактное лицо:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{user_name}}</strong>
 			</div>
 			<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">
-				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Тип доставки:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{delevery}}</strong>
+				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Email:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{user_email}}</strong>
 			</div>
 			<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">
-				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Форма оплаты:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{payment}}</strong>
+				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Телефон:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{user_phone}}</strong>
 			</div>
-			<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">
-				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Контактное лицо:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{user_data.first_name}} {{user_data.last_name}}</strong>
-			</div>
-			<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">
-				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Email:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{user_data.username}}</strong>
-			</div>
-			<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">
-				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Телефон:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{request.user.phone_number}}</strong>
-			</div>
-			<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">
-				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Адрес доставки:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{request.user.location}}</strong>
-			</div>
-			<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">
-				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Комментарии к заказу:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{description}}</strong>
-			</div>
+{#			<div style="float: left;width: 100%;margin: 0 0 10px;padding: 0 0 5px;border-bottom: 1px solid #e2e2e2;">#}
+{#				<strong style="font-size: 14px;font-weight: 500;width: 190px;float: left;">Комментарии к заказу:</strong><strong style="font-size: 16px;font-weight: 600;float: left;max-width: 60%;">{{description}}</strong>#}
+{#			</div>#}
 
 
 
