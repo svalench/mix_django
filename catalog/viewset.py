@@ -35,8 +35,6 @@ class DocsCertificatesViewSet(viewsets.ModelViewSet):
         filter_values = []
         if self.request.GET.get('parent_ch'):
             filter_values = self.request.query_params.getlist('parent_ch')
-            qq = Q()
-            for ch in filter_values:
-                qq = qq | Q(parent__id=ch)
-                queryset = queryset.filter(qq)
+            qq = Q(parent__in=filter_values)
+            queryset = queryset.filter(qq)
         return queryset
