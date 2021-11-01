@@ -26,4 +26,5 @@ class DocsCertificatesViewSet(viewsets.ModelViewSet):
     serializer_class = DocumentsCardProductSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['name']
+    filterset_fields = ['parent']
     permission_classes = [permissions.AllowAny]
