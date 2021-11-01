@@ -37,7 +37,7 @@ class SecondCategoryAdmin(admin.ModelAdmin):
 
 class CertificateAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'parent', 'date_upd', 'date_add')
-    list_display_links = ('id', 'name', 'date_upd')
+    list_display_links = ('id', 'parent', 'date_upd')
     search_fields = ('id', 'name')
     list_editable = ('name',)
     list_filter = ('date_add', 'date_upd', 'parent')
