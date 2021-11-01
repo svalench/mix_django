@@ -5,7 +5,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from rest_framework.exceptions import ValidationError
 
-from mix_django.settings import DOMAIN, EMAIL_HOST_USER
+from mix_django.settings import DOMAIN, EMAIL_HOST_USER, MANAGER_EMAIL
 from product.models import Product
 from user.views import account_activation_token
 
@@ -26,7 +26,9 @@ class EmailSending:
         print(cart)
         produtcs = Product.objects.filter(id__in=cart['products'])
         cart['producty'] = produtcs
+        cart['manager_email'] = MANAGER_EMAIL
         self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, cart['user_email'])
+        self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, MANAGER_EMAIL)
 
 
     def send_email_registration(self, user):
