@@ -1,3 +1,4 @@
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
@@ -14,8 +15,9 @@ class EmailSending:
 
     """
 
-    def __init__(self):
+    def __init__(self, request):
         self.current_site = DOMAIN
+        self.current_site = get_current_site(request)
         self.my_email = EMAIL_HOST_USER
 
     def send_cart_email(self, cart):
@@ -28,7 +30,7 @@ class EmailSending:
         """отправка сообщения при авторизации"""
         mail_subject = 'Activate your account.'
         data = {
-            'domain': self.current_site,
+            'domain': self.current_site.domain,
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
             'token': account_activation_token.make_token(user),
         }
