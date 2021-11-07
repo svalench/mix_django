@@ -27,7 +27,7 @@ class ProductsListViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     ordering_fields = []
-    filterset_fields = ['parent__category', 'characteristics']
+    filterset_fields = ['parent__category', 'characteristics', 'parent']
     search_fields = ['name', 'article']
 
     def get_queryset(self, *args, **kwargs):
