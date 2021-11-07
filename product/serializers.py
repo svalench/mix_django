@@ -44,10 +44,18 @@ class CharacteristicSerializer(serializers.ModelSerializer):
 class CharacteristicValueSerializer(serializers.ModelSerializer):
     """сериализация модели Characteristics """
     characterisitc = CharacteristicSerializer(source='parent', read_only=True)
+    unit = serializers.SerializerMethodField()
+
     class Meta:
         model = CharacteristicValue
         permission_classes = (IsAuthenticated,)
         fields = '__all__'
+
+    def get_unit(self, obj):
+        if obj.units:
+            return str(obj.units.name)
+        else:
+            return ''
 
 
 
