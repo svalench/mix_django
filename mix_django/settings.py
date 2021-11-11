@@ -219,7 +219,7 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'mixenerdgy.by@yandex.by'
 EMAIL_HOST_PASSWORD = '8940113Wert'
 
-DOMAIN = 'api.mixenerdgy.by'
+DOMAIN = 'mixenerdgy.by'
 MANAGER_EMAIL = 'mixenerdgy@mail.ru'
 #==================================================================================================
 #==================================================================================================
