@@ -216,10 +216,10 @@ GRAPPELLI_ADMIN_TITLE = 'MixEnergy'
 EMAIL_USE_SSL = True
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'mixenerdgy-by@yandex.ru'
+EMAIL_HOST_USER = 'mixenerdgy.by@yandex.by'
 EMAIL_HOST_PASSWORD = '8940113Wert'
 
-DOMAIN = 'https://mixenerdgy.by'
+DOMAIN = 'mixenerdgy.by'
 MANAGER_EMAIL = 'mixenerdgy@mail.ru'
 #==================================================================================================
 #==================================================================================================
