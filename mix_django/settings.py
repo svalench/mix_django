@@ -214,14 +214,11 @@ GRAPPELLI_ADMIN_TITLE = 'MixEnergy'
 
 # EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = True
-# EMAIL_HOST = 'mixenerdgy.by'
-# EMAIL_PORT = 25
-# EMAIL_HOST_USER = 'info@mixenerdgy.by'
-# EMAIL_HOST_PASSWORD = '8940113Wert'
-EMAIL_HOST = 'mail.arhiterm.by'
+EMAIL_HOST = 'mixenerdgy.by'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = 'testmail@arhiterm.by'
-EMAIL_HOST_PASSWORD = '19921122'
+EMAIL_HOST_USER = 'mixenerdgy.by@yndex.by'
+EMAIL_HOST_PASSWORD = '8940113Wert'
+
 DOMAIN = 'api.mixenerdgy.by'
 MANAGER_EMAIL = 'mixenerdgy@mail.ru'
 #==================================================================================================
