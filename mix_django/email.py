@@ -28,7 +28,7 @@ class EmailSending:
         cart['producty'] = produtcs
         cart['manager_email'] = MANAGER_EMAIL
         self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, cart['user_email'])
-        # self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, MANAGER_EMAIL)
+        self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, MANAGER_EMAIL)
 
 
     def send_email_registration(self, user):
