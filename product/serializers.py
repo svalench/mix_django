@@ -98,7 +98,7 @@ class ProductAlongSerializer(serializers.ModelSerializer):
         return obj.parent.characteristic_for_show.charac_value.all().first().units.name
 
     def get_value_char_show(self, obj):
-        return obj.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).value
+        return obj.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).first().value
 
 
     class Meta:
