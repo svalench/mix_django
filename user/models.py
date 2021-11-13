@@ -79,6 +79,6 @@ class Carts(models.Model):
     date_add = models.DateTimeField('дата добавления', auto_now_add=True)
     date_upd = models.DateTimeField('дата обновления', auto_now=True)
     products = models.ManyToManyField(Product)
-    list_products = models.ForeignKey(ProductCounts, verbose_name='список продукт', null=True, blank=True , on_delete=models.SET_NULL)
+    list_products = models.ManyToManyField(ProductCounts, verbose_name='список продукт')
 
 
