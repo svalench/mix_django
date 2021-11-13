@@ -99,7 +99,7 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_characteristic_show(self, obj):
         return obj.parent.characteristic_for_show.name
 
-    def value_search_filter(self, obj):
+    def get_search_filter(self, obj):
         print(obj.characteristics.filter(id=obj.parent.characteristic_for_show))
         return obj.characteristics.filter(id=obj.parent.characteristic_for_show).values()
 
