@@ -65,7 +65,7 @@ class User(AbstractUser):
 
 
 class ProductCounts(models.Model):
-    product = models.ForeignKey(Product, verbose_name='продукт', on_delete=models.SET_NULL)
+    product = models.ForeignKey(Product, verbose_name='продукт', null=True, on_delete=models.SET_NULL)
     count = models.IntegerField('количество продуктов', db_index=True, null=True, default=0, blank=True)
     date_add = models.DateTimeField('дата добавления', auto_now_add=True)
     date_upd = models.DateTimeField('дата обновления', auto_now=True)
