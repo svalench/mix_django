@@ -26,6 +26,7 @@ class EmailSending:
         print(cart)
         produtcs = Product.objects.filter(id__in=cart['products'])
         cart['producty'] = produtcs
+        cart['list_products'] = cart.list_products
         cart['manager_email'] = MANAGER_EMAIL
         self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, cart['user_email'])
         self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, MANAGER_EMAIL)
