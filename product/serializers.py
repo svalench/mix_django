@@ -108,7 +108,7 @@ class ProductSerializer(serializers.ModelSerializer):
                 for x in obj.parent.child.all()]
         brothers = obj.parent.child.all()
         for i in res:
-            i['brother'] = obj.parent.child.filter(characteristics__parent__id=id).values().first()
+            i['brother'] = obj.parent.child.filter(characteristics__parent__id=i['id']).values().first()
         return res
 
 
