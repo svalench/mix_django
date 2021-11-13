@@ -79,6 +79,10 @@ class UserSerializerS(serializers.ModelSerializer):
 
 class ProductCountsSerializer(serializers.ModelSerializer):
 
+    def __init__(self, *args, **kwargs):
+        many = kwargs.pop('many', True)
+        super(ProductCountsSerializer, self).__init__(many=many, *args, **kwargs)
+
     class Meta:
         model = ProductCounts
         permission_classes = (IsAuthenticated,)
