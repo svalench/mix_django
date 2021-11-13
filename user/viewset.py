@@ -1,7 +1,7 @@
 
 from django.contrib.auth.hashers import check_password
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, permissions, generics
+from rest_framework import viewsets, permissions, generics, status
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.exceptions import ValidationError
 from rest_framework.filters import OrderingFilter, SearchFilter
@@ -89,13 +89,16 @@ class UserAuthTokenUpdate(ObtainAuthToken):
 
 
 class ProductCountsViewSet(viewsets.ModelViewSet):
-    def __init__(self, *args, **kwargs):
-        many = kwargs.pop('many', True)
-        super(ProductCountsViewSet, self).__init__(many=many, *args, **kwargs)
-
     queryset = ProductCounts.objects.all()
     serializer_class = CartSerializer
     permission_classes = [permissions.AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data, many=isinstance(request.data, list))
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 class CartsViewSet(viewsets.ModelViewSet):
     queryset = Carts.objects.all()
