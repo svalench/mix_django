@@ -89,6 +89,10 @@ class UserAuthTokenUpdate(ObtainAuthToken):
 
 
 class ProductCountsViewSet(viewsets.ModelViewSet):
+    def __init__(self, *args, **kwargs):
+        many = kwargs.pop('many', True)
+        super(ProductCountsViewSet, self).__init__(many=many, *args, **kwargs)
+
     queryset = ProductCounts.objects.all()
     serializer_class = CartSerializer
     permission_classes = [permissions.AllowAny]
