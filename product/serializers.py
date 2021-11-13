@@ -92,14 +92,19 @@ class ProductAlongSerializer(serializers.ModelSerializer):
             return ''
 
     def get_characteristic_show(self, obj):
-        return obj.parent.characteristic_for_show.name
+        return getattr(obj.parent.characteristic_for_show, 'name', '')
 
     def get_unit_shows(self, obj):
-        return obj.parent.characteristic_for_show.charac_value.all().first().units.name
+        if obj.parent.characteristic_for_show:
+            return obj.parent.characteristic_for_show.charac_value.all().first().units.name
+        else:
+            return ''
 
     def get_value_char_show(self, obj):
-        return obj.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).first().value
-
+        if obj.parent.characteristic_for_show:
+            return obj.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).first().value
+        else:
+            return ''
 
     class Meta:
         model = Product
@@ -123,12 +128,14 @@ class ProductSerializer(serializers.ModelSerializer):
         else:
             return ''
 
-
     def get_characteristic_show(self, obj):
-        return obj.parent.characteristic_for_show.name
+        return getattr(obj.parent.characteristic_for_show, 'name', '')
 
     def get_unit_shows(self, obj):
-        return obj.parent.characteristic_for_show.charac_value.all().first().units.name
+        if obj.parent.characteristic_for_show:
+            return obj.parent.characteristic_for_show.charac_value.all().first().units.name
+        else:
+            return ''
 
     def get_search_filter(self, obj):
         res = [x.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).values().first()
