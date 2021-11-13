@@ -7,6 +7,7 @@ from rest_framework.exceptions import ValidationError
 
 from mix_django.settings import DOMAIN, EMAIL_HOST_USER, MANAGER_EMAIL
 from product.models import Product
+from user.models import ProductCounts
 from user.views import account_activation_token
 
 
@@ -24,9 +25,9 @@ class EmailSending:
     def send_cart_email(self, cart):
         mail_subject = 'Заказ на mixenerdgy'
         print(cart)
-        produtcs = Product.objects.filter(id__in=cart['products'])
+        produtcs = ProductCounts.objects.filter(product__in=cart['products'])
         cart['producty'] = produtcs
-        cart['list_products'] = cart.list_products
+        cart['list_products'] = produtcs
         cart['manager_email'] = MANAGER_EMAIL
         self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, cart['user_email'])
         self.send_html_email('Заказ на mixenerdgy', 'email_template/order.html', cart, MANAGER_EMAIL)
