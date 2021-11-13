@@ -10,7 +10,7 @@ router_product = routers.DefaultRouter()
 
 # user
 router_user.register(r'user/cart', user.CartsViewSet)
-router_user.register(r'user/cart/list/products', user.ProductCountsViewSet)
+router_user.register(r'cart/list/products', user.ProductCountsViewSet)
 
 # categories
 router_catalog.register(r'categories', categories.CategoriesListViewSet)
