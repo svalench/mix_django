@@ -113,6 +113,10 @@ class Product(BaseModel):
                                  max_digits=12, decimal_places=2)
     price = models.DecimalField('цена', blank=True, default=0.0, max_digits=32,
                                 decimal_places=2, null=True)
+    characteristic_for_show = models.ForeignKey(Characteristics,
+                                                null=True,
+                                                blank=True,
+                                                verbose_name='характеристика для показа')
 
     class Meta:
         verbose_name = 'Продукт'
