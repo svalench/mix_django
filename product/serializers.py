@@ -103,7 +103,7 @@ class ProductSerializer(serializers.ModelSerializer):
             setattr(i, 'value', i.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id)
                     .values().first()['value'])
             c+=1
-        return dict(res)
+        return list(res)
 
     def get_characteristic_show(self, obj):
         return obj.parent.characteristic_for_show.name
