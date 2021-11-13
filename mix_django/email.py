@@ -25,7 +25,8 @@ class EmailSending:
     def send_cart_email(self, cart):
         mail_subject = 'Заказ на mixenerdgy'
         print(cart)
-        produtcs = ProductCounts.objects.filter(carts=cart['id'])
+        produtcs = ProductCounts.objects.filter(product__in=cart['products'])
+        print(dir(produtcs))
         cart['producty'] = produtcs
         cart['list_products'] = produtcs
         cart['manager_email'] = MANAGER_EMAIL
