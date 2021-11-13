@@ -97,10 +97,12 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_brothers(self, obj):
         res = obj.parent.child.all()
         result = res.values()
-        for (i,k) in res:
-            result[k] = i.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).values().first()['value']
+        c = 0
+        for i in res:
+            result[c] = i.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).values().first()['value']
             setattr(i, 'value', i.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id)
                     .values().first()['value'])
+            c+=1
         return result
 
     def get_characteristic_show(self, obj):
