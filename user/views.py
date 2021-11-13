@@ -83,8 +83,8 @@ def get_user_country(request):
         country = g.country(ip)
         city = g.city(ip)
     except:
-        country = g.country('beautymasters.online')
-        city = g.city('beautymasters.online')
+        country = g.country('e')
+        city = g.city('e')
     return Response({'status': True, "text": "Good params", 'data': {"country": country, "city": city, 'ip': ip}}, status=200)
 
 

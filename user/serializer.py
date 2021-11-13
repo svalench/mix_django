@@ -5,7 +5,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from user.models import User, Carts
+from user.models import User, Carts, ProductCounts
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -74,6 +74,13 @@ class UserSerializerS(serializers.ModelSerializer):
 
     class Meta:
         model = User
+        permission_classes = (IsAuthenticated,)
+        fields = '__all__'
+
+class ProductCountsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductCounts
         permission_classes = (IsAuthenticated,)
         fields = '__all__'
 

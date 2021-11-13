@@ -64,6 +64,12 @@ class User(AbstractUser):
             self.save()
 
 
+class ProductCounts(models.Model):
+    product = models.ForeignKey(Product, verbose_name='продукт', on_delete=models.SET_NULL)
+    count = models.IntegerField('количество продуктов', db_index=True, null=True, default=0, blank=True)
+    date_add = models.DateTimeField('дата добавления', auto_now_add=True)
+    date_upd = models.DateTimeField('дата обновления', auto_now=True)
+
 
 class Carts(models.Model):
     """Корзина заказов"""
@@ -73,4 +79,6 @@ class Carts(models.Model):
     date_add = models.DateTimeField('дата добавления', auto_now_add=True)
     date_upd = models.DateTimeField('дата обновления', auto_now=True)
     products = models.ManyToManyField(Product)
+    list_products = models.ForeignKey(ProductCounts, verbose_name='список продукт', on_delete=models.SET_NULL)
+
 
