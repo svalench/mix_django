@@ -116,7 +116,8 @@ class Product(BaseModel):
     characteristic_for_show = models.ForeignKey(Characteristics,
                                                 null=True,
                                                 blank=True,
-                                                verbose_name='характеристика для показа')
+                                                verbose_name='характеристика для показа',
+                                                on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = 'Продукт'
