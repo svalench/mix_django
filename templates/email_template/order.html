@@ -85,25 +85,24 @@
 
 
 
-{%for card in producty%}
-    {{ card }}
+{%for card in list_product%}
 <div style="float: left;width: 100%;margin: 0 0 10px;font-size: 15px;border-bottom: 1px solid #e2e2e2;">
 						<div style="float: left;width: 100px;height: 100px;display: flex;vertical-align: middle;justify-content: center;align-items: center;margin: 0 10px 10px 0;">
-							<img src="https://api.mixenerdgy.by/media/{{card.parent.img }}" style="max-width:100%;max-height:100%;">
+							<img src="https://api.mixenerdgy.by/media/{{card.product.parent.img }}" style="max-width:100%;max-height:100%;">
 						</div>
 						<div style="display: grid;">
-						<div style="float: left;width: 100%;margin: 0 0 10px;font-size: 15px;">{{card.name}}</div>
+						<div style="float: left;width: 100%;margin: 0 0 10px;font-size: 15px;">{{card.product.name}}</div>
 {#						<div style="float: left;width: 100%;margin: 0 0 5px;font-size: 13px;">#}
 {#							<strong style="font-size: 12px;font-weight: 500;">{{card.product_data.filter_show_name}}:</strong>#}
 {#							<span style="font-size: 15px;font-weight: 500;margin: 0 0 0 3px;">{{card.product_data.filter_show_value}}</span>#}
 {#						</div>#}
 						<div style="float: left;width: 100%;margin: 0 0 5px;font-size: 13px;">
 						<strong style="font-size: 12px;font-weight: 500;">Код товара:</strong>
-							<strong style="font-size: 15px;font-weight: 500;margin: 0 0 0 3px;"><span>{{card.article}}</span></strong>
+							<strong style="font-size: 15px;font-weight: 500;margin: 0 0 0 3px;"><span>{{card.product.article}}</span></strong>
 						</div>
 						<div style="float: left;width: 100%;margin: 0 0 5px;font-size: 13px;">
 						<strong style="font-size: 12px;font-weight: 500;">Количество:</strong>
-							<strong style="font-size: 15px;font-weight: 500;margin: 0 0 0 3px;">{{card.list_products.count}}<span> / ед.</span></strong>
+							<strong style="font-size: 15px;font-weight: 500;margin: 0 0 0 3px;">{{card.count}}<span> / ед.</span></strong>
 						</div>
 {#						<div style="float: left;width: 100%;margin: 0 0 10px;font-size: 13px;">#}
 {#						<strong style="font-size: 12px;font-weight: 500;">Стоимость:</strong>#}
