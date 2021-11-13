@@ -95,10 +95,10 @@ class ProductSerializer(serializers.ModelSerializer):
             return ''
 
     def get_brothers(self, obj):
-        res = obj.parent.child.all().values()
+        res = obj.parent.child.all()
         for i in res:
             i['value'] = i.characteristics.value
-        return res
+        return res.values()
 
     def get_characteristic_show(self, obj):
         return obj.parent.characteristic_for_show.name
