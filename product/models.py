@@ -93,6 +93,11 @@ class ProductsImages(models.Model):
 class CardProduct(BaseModel):
     """модель карточки товара"""
     img = models.ImageField( default='/img/noimg.png', blank=True, verbose_name="изображение")
+    characteristic_for_show = models.ForeignKey(Characteristics,
+                                                null=True,
+                                                blank=True,
+                                                verbose_name='характеристика для показа',
+                                                on_delete=models.SET_NULL)
     filters = models.ManyToManyField(FiltersValue, related_name='filter', blank=True, null=True, verbose_name="фильтр")
     category = models.ForeignKey(SecondCategory, related_name='category', on_delete=models.SET_NULL, verbose_name="категория", blank=True, null=True)
     class Meta:
@@ -113,11 +118,6 @@ class Product(BaseModel):
                                  max_digits=12, decimal_places=2)
     price = models.DecimalField('цена', blank=True, default=0.0, max_digits=32,
                                 decimal_places=2, null=True)
-    characteristic_for_show = models.ForeignKey(Characteristics,
-                                                null=True,
-                                                blank=True,
-                                                verbose_name='характеристика для показа',
-                                                on_delete=models.SET_NULL)
 
     class Meta:
         verbose_name = 'Продукт'
