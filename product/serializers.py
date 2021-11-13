@@ -98,7 +98,7 @@ class ProductSerializer(serializers.ModelSerializer):
         res = obj.parent.child.all()
         for i in res:
             setattr(i, 'value', i.characteristics.value)
-        return res
+        return res.values()
 
     def get_characteristic_show(self, obj):
         return obj.parent.characteristic_for_show.name
