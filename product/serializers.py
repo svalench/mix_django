@@ -82,6 +82,7 @@ class ProductSerializer(serializers.ModelSerializer):
     characteristics_norm = CharacteristicValueSerializer(source='characteristics.all', read_only=True, many=True)
     images = CardImagesSerializer(source='parent.images.all', read_only=True, many=True)
     img = serializers.SerializerMethodField()
+    brothers = serializers.SerializerMethodField()
     card = CardProductAlongSerializer(source='parent', read_only=True)
 
     def get_img(self, obj):
@@ -89,6 +90,10 @@ class ProductSerializer(serializers.ModelSerializer):
             return str(obj.parent.img)
         else:
             return ''
+
+    def get_brothers(self, obj):
+        return obj.parent.child.all().values()
+
 
     class Meta:
         model = Product
