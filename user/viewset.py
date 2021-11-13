@@ -11,7 +11,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
 from mix_django.email import EmailSending
-from user.models import User, Carts
+from user.models import User, Carts, ProductCounts
 from user.serializer import UserSerializer, ChangePasswordSerializer, UserSerializerS, CartSerializer
 
 
@@ -87,6 +87,11 @@ class UserAuthTokenUpdate(ObtainAuthToken):
             'email': request.user.email
         })
 
+
+class ProductCountsViewSet(viewsets.ModelViewSet):
+    queryset = ProductCounts.objects.all()
+    serializer_class = CartSerializer
+    permission_classes = [permissions.AllowAny]
 
 class CartsViewSet(viewsets.ModelViewSet):
     queryset = Carts.objects.all()
