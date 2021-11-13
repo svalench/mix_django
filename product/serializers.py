@@ -100,8 +100,8 @@ class ProductSerializer(serializers.ModelSerializer):
         return obj.parent.characteristic_for_show.name
 
     def get_search_filter(self, obj):
-        return [CharacteristicValueSerializer(x.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).first())
-                for x in obj.parent.child.all()]
+        return CharacteristicValueSerializer([x.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).first()
+                for x in obj.parent.child.all()])
 
 
     class Meta:
