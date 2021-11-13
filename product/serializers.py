@@ -76,15 +76,46 @@ class CardProductAlongSerializer(serializers.ModelSerializer):
         permission_classes = (IsAuthenticated,)
         fields = '__all__'
 
+class ProductAlongSerializer(serializers.ModelSerializer):
+    """сериализация модели Product  along"""
+    characteristics_norm = CharacteristicValueSerializer(source='characteristics.all', read_only=True, many=True)
+    images = CardImagesSerializer(source='parent.images.all', read_only=True, many=True)
+    img = serializers.SerializerMethodField()
+    brothers = serializers.SerializerMethodField()
+    characteristic_show = serializers.SerializerMethodField()
+    value_char_show = serializers.SerializerMethodField()
+    unit_shows = serializers.SerializerMethodField()
+
+    def get_img(self, obj):
+        if obj.parent:
+            return str(obj.parent.img)
+        else:
+            return ''
+
+
+    def get_characteristic_show(self, obj):
+        return obj.parent.characteristic_for_show.name
+
+    def get_unit_shows(self, obj):
+        return obj.parent.characteristic_for_show.charac_value.all().first().units.name
+
+    def value_char_show(self, obj):
+        return obj.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).value
+
+
+    class Meta:
+        model = Product
+        permission_classes = (IsAuthenticated,)
+        fields = '__all__'
+
 
 class ProductSerializer(serializers.ModelSerializer):
     """сериализация модели Product """
     characteristics_norm = CharacteristicValueSerializer(source='characteristics.all', read_only=True, many=True)
     images = CardImagesSerializer(source='parent.images.all', read_only=True, many=True)
     img = serializers.SerializerMethodField()
-    brothers = serializers.SerializerMethodField()
+    brothers = ProductAlongSerializer(source='parent.child.all', read_only=True, many=True)
     characteristic_show = serializers.SerializerMethodField()
-    search_filter = serializers.SerializerMethodField()
     unit_shows = serializers.SerializerMethodField()
     card = CardProductAlongSerializer(source='parent', read_only=True)
 
@@ -94,16 +125,6 @@ class ProductSerializer(serializers.ModelSerializer):
         else:
             return ''
 
-    def get_brothers(self, obj):
-        res = obj.parent.child.all()
-        result = res.values()
-        c = 0
-        for i in res:
-            # result[c] = i.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).values().first()['value']
-            setattr(i, 'value', i.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id)
-                    .values().first()['value'])
-            c+=1
-        return list(res)
 
     def get_characteristic_show(self, obj):
         return obj.parent.characteristic_for_show.name
