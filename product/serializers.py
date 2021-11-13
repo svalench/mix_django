@@ -84,7 +84,7 @@ class ProductSerializer(serializers.ModelSerializer):
     img = serializers.SerializerMethodField()
     brothers = serializers.SerializerMethodField()
     characteristic_show = serializers.SerializerMethodField()
-    characteristic_show_list = serializers.SerializerMethodField()
+    search_filter = serializers.SerializerMethodField()
     card = CardProductAlongSerializer(source='parent', read_only=True)
 
     def get_img(self, obj):
@@ -99,9 +99,9 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_characteristic_show(self, obj):
         return obj.parent.characteristic_for_show.name
 
-    def get_characteristic_show_list(self, obj):
-        return [x.characteristics.filter(parent=obj.parent.characteristic_for_show.id).first()
-                for x in obj.parent.child.all()]
+    def value_search_filter(self, obj):
+        print(obj.characteristics.filter(id=obj.parent.characteristic_for_show))
+        return obj.characteristics.filter(id=obj.parent.characteristic_for_show).values()
 
 
     class Meta:
