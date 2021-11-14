@@ -129,7 +129,10 @@ class ProductSerializer(serializers.ModelSerializer):
             return ''
 
     def get_characteristic_show(self, obj):
-        return getattr(obj.parent.characteristic_for_show, 'name', '')
+        if obj.parent:
+            return getattr(obj.parent.characteristic_for_show, 'name', '')
+        else:
+            return ''
 
     def get_unit_shows(self, obj):
         if obj.parent.characteristic_for_show:
