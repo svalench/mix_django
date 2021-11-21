@@ -22,7 +22,7 @@ class Command(BaseCommand):
         for x in self.LIST_OF_FILES:
             files += glob.glob(self.DIRECTORY + f'/**/*.{x}', recursive=True)
         print(files)
-        for file in glob.iglob(self.DIRECTORY, recursive=True):
+        for file in glob.iglob(self.DIRECTORY + f'/**/*.{x}', recursive=True):
             print(file)
         #     file = Image.open("kenya_buzz_2.jpg")
         #     file.save("kenya_buzz_compressed.jpg", format="JPEG", quality=quality)
