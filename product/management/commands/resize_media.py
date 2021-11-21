@@ -21,7 +21,7 @@ class Command(BaseCommand):
         for x in self.LIST_OF_FILES:
             for file in glob.iglob(self.DIRECTORY + f'/**/*.{x}', recursive=True):
                 path, file_ = os.path.split(file)
-                print(path, '||', file)
+                print(path, '||', file_)
                 file_name = Path(file).stem
                 print(file_name, 'filename')
                 # file_new = Image.open(file)
