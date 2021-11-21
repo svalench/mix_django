@@ -21,8 +21,8 @@ class Command(BaseCommand):
         for x in self.LIST_OF_FILES:
             for file in glob.iglob(self.DIRECTORY + f'/**/*.{x}', recursive=True):
                 path, file_ = os.path.split(file)
-                print(path, '||', file_)
+                path_list = file.split(os.sep)
                 file_name = Path(file).stem
                 print(file_name, 'filename')
-                # file_new = Image.open(file)
-                # file_new.save("kenya_buzz_compressed.jpg", format="JPEG", quality=quality)
+                file_new = Image.open(file)
+                file_new.save(f'/var/www/www-root/data/www/api.mixenerdgy.by/back/mix_django/media2/_{quality}_'+file_name+".jpeg", format="JPEG", quality=quality)
