@@ -25,4 +25,4 @@ class Command(BaseCommand):
                 file_name = Path(file).stem
                 print(file_name, 'filename')
                 file_new = Image.open(file)
-                file_new.save(f'/var/www/www-root/data/www/api.mixenerdgy.by/back/mix_django/media2/_{quality}_'+file_name+".jpeg", format="JPEG", quality=quality)
+                file_new.convert('RGB').save(f'/var/www/www-root/data/www/api.mixenerdgy.by/back/mix_django/media2/_{quality}_'+file_name+".jpeg", format="JPEG", quality=quality)
