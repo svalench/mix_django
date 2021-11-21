@@ -18,11 +18,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         quality = kwargs['quality']
-        files = []
         for x in self.LIST_OF_FILES:
-            files += glob.glob(self.DIRECTORY + f'/**/*.{x}', recursive=True)
-        print(files)
-        for file in glob.iglob(self.DIRECTORY + f'/**/*.{x}', recursive=True):
-            print(file)
-        #     file = Image.open("kenya_buzz_2.jpg")
-        #     file.save("kenya_buzz_compressed.jpg", format="JPEG", quality=quality)
+            for file in glob.iglob(self.DIRECTORY + f'/**/*.{x}', recursive=True):
+                path, file_ = os.path.split(file)
+                print(path, '||', file)
+                file_name = Path(file).stem
+                print(file_name, 'filename')
+                # file_new = Image.open(file)
+                # file_new.save("kenya_buzz_compressed.jpg", format="JPEG", quality=quality)
