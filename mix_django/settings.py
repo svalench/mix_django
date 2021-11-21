@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'catalog',
     'product',
     'dynamic_raw_id',
+    'management',
 ]
 
 MIDDLEWARE = [
