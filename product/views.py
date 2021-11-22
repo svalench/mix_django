@@ -1,7 +1,3 @@
-from django.shortcuts import render
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_cookie
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -11,8 +7,6 @@ from product.models import Product
 
 
 @api_view(http_method_names=['GET'])
-@method_decorator(cache_page(60*60))
-@method_decorator(vary_on_cookie)
 def filter_cats(request):
     """Возвращает только те характеристики которые определены в переданной категории"""
     data = {}

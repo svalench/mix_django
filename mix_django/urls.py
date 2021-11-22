@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
+from django.views.decorators.cache import cache_page
 
 from mix_django import settings
 from mix_django.router import router_catalog, router_product, router_user
@@ -27,7 +28,7 @@ urlpatterns = [
     url(r'^admin/dynamic_raw_id/', include('dynamic_raw_id.urls')),
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
-    path('cat/characterisitcs', filter_cats, name='filter_cats'),
+    path('cat/characterisitcs', cache_page(60*60)(filter_cats), name='filter_cats'),
 
     # ==============DRF route======================
     # users
