@@ -9,9 +9,10 @@ from rest_framework.response import Response
 from product.models import Product
 
 
+
+@api_view(http_method_names=['GET'])
 @method_decorator(cache_page(60*60))
 @method_decorator(vary_on_cookie)
-@api_view(http_method_names=['GET'])
 def filter_cats(request):
     """Возвращает только те характеристики которые определены в переданной категории"""
     data = {}
