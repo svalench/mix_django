@@ -34,10 +34,6 @@ class ProductsListViewSet(viewsets.ModelViewSet):
     filterset_fields = ['parent__category', 'characteristics', 'parent']
     search_fields = ['name', 'article']
 
-    @method_decorator(cache_page(60*10))
-    @method_decorator(vary_on_cookie)
-    def list(self, request, *args, **kwargs):
-        super(ProductsListViewSet, self).list(request, *args, **kwargs)
         
     def get_queryset(self, *args, **kwargs):
         queryset = Product.objects.all()
