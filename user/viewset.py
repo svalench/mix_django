@@ -1,5 +1,7 @@
 
 from django.contrib.auth.hashers import check_password
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions, generics, status
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -93,6 +95,14 @@ class ProductCountsViewSet(viewsets.ModelViewSet):
     queryset = ProductCounts.objects.all()
     serializer_class = ProductCountsSerializer
     permission_classes = [permissions.AllowAny]
+
+    @method_decorator(cache_page(60 * 2))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 2))
+    def list(self, request, *args, **kwargs):
+        return super(ProductCountsViewSet, self).list(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data, many=isinstance(request.data, list))

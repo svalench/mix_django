@@ -21,6 +21,15 @@ class ProductsListRandomViewSet(viewsets.ModelViewSet):
     filterset_fields = ['parent__category', 'characteristics']
     search_fields = ['name', 'article']
 
+    @method_decorator(cache_page(60 * 2))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 2))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+
     def get_queryset(self):
         return Product.objects.order_by('?')
 
