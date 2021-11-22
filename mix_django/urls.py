@@ -33,8 +33,8 @@ urlpatterns = [
     # ==============DRF route======================
     # users
     path('users/', include(router_user.urls)),
-    path('catalog/', cache_page(60*60*3)(include(router_catalog.urls))),
-    path('product/', cache_page(60*10)(include(router_product.urls))),
+    path('catalog/', include(router_catalog.urls)),
+    path('product/', include(router_product.urls)),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
