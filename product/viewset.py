@@ -1,3 +1,7 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
+
 from mix_django.email import EmailSending
 from product.models import Product, CharacteristicValue, Characteristics
 from product.serializers import ProductSerializer, CharacteristicValueSerializer, CharacteristicWithValueSerializer
@@ -30,6 +34,8 @@ class ProductsListViewSet(viewsets.ModelViewSet):
     filterset_fields = ['parent__category', 'characteristics', 'parent']
     search_fields = ['name', 'article']
 
+    @method_decorator(cache_page(60*10))
+    @method_decorator(vary_on_cookie)
     def get_queryset(self, *args, **kwargs):
         queryset = Product.objects.all()
         super(ProductsListViewSet, self).get_queryset()
