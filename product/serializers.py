@@ -117,7 +117,7 @@ class ProductSerializer(serializers.ModelSerializer):
     characteristics_norm = CharacteristicValueSerializer(source='characteristics.all', read_only=True, many=True)
     images = CardImagesSerializer(source='parent.images.all', read_only=True, many=True)
     img = serializers.SerializerMethodField()
-    brothers = ProductAlongSerializer(source='parent.child.all', read_only=True, many=True)
+    #brothers = ProductAlongSerializer(source='parent.child.all', read_only=True, many=True)
     characteristic_show = serializers.SerializerMethodField()
     unit_shows = serializers.SerializerMethodField()
     card = CardProductAlongSerializer(source='parent', read_only=True)
