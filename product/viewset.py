@@ -3,8 +3,9 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
 from mix_django.email import EmailSending
-from product.models import Product, CharacteristicValue, Characteristics
-from product.serializers import ProductSerializer, CharacteristicValueSerializer, CharacteristicWithValueSerializer
+from product.models import Product, CharacteristicValue, Characteristics, CardProduct
+from product.serializers import ProductSerializer, CharacteristicValueSerializer, CharacteristicWithValueSerializer, \
+    CardProductSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -82,3 +83,12 @@ class CharacteristicsListViewSet(viewsets.ModelViewSet):
     filterset_fields = ['charac_value__characteristic__parent__category']
     search_fields = ['name', 'article']
 
+class CardProductViewSet(viewsets.ModelViewSet):
+    queryset = CardProduct.objects.all()
+    serializer_class = CardProductSerializer
+    http_method_names = ['get', 'head']
+    permission_classes = [permissions.AllowAny]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    ordering_fields = []
+    filterset_fields = []
+    search_fields = ['name', 'child__name']
