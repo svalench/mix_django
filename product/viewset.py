@@ -40,7 +40,7 @@ class ProductsListViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'head']
     permission_classes = [permissions.AllowAny]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    ordering_fields = []
+    ordering_fields = ['id']
     filterset_fields = ['parent__category', 'characteristics', 'parent']
     search_fields = ['name', 'article']
 
