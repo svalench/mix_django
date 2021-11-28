@@ -137,7 +137,10 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_unit_shows(self, obj):
         if obj.parent.characteristic_for_show:
-            return obj.parent.characteristic_for_show.charac_value.all().first().units.name
+            for i in obj.characteristics.all():
+                if i.id == obj.parent.characteristic_for_show.id:
+                    return i.units.name
+            return ''
         else:
             return ''
 
