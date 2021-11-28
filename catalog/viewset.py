@@ -12,7 +12,7 @@ class CategoriesListViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'head']
     permission_classes = [permissions.AllowAny]
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    ordering_fields = []
+    ordering_fields = ['weight_in_menu']
     filterset_fields = []
     search_fields = ['name']
 
