@@ -152,9 +152,10 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_value_char_show(self, obj):
         if obj.parent.characteristic_for_show:
-            return obj.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).first().value
-        else:
-            return ''
+            res = obj.characteristics.filter(parent__id=obj.parent.characteristic_for_show.id).first()
+            if res:
+                return res.value
+        return ''
 
 
     class Meta:
