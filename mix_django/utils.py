@@ -17,6 +17,7 @@ def load_env(path: Path):
     """
     >>>
     """
+    print(path)
     if not path.exists():
         print('path not exist')
         return
