@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 from .utils import load_env 
 
 get_env = os.environ.get
-
+load_env(BASE_DIR / "../.env") #here you indicate where your .env file is
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
