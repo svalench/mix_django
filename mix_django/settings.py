@@ -94,14 +94,14 @@ AUTH_USER_MODEL = 'user.User'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 print(os.environ)
-print(get_env('prod'))
-if os.environ.get('prod')!='':
+print(get_env('PROD'))
+if get_env('PROD', False):
     DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('name_django_db'),
-        'USER': os.environ.get('user_django_db'),
-        'PASSWORD': os.environ.get('password_django_db'),
+        'NAME': os.environ.get('DJANGO_DB'),
+        'USER': os.environ.get('USER_DJANGO_DB'),
+        'PASSWORD': os.environ.get('PASSWORD_DJANGO_DB'),
         'HOST': 'localhost',
         'PORT': 5432,
         }
