@@ -73,14 +73,14 @@ class ProductInline(admin.StackedInline):
 
 
 class CardProductAdminForm(forms.ModelForm):
-    child = forms.MultipleChoiceField(label="Продукты", required=False, choices=Product.objects.values_list('id','name'))
+    #child = forms.MultipleChoiceField(label="Продукты", required=False, choices=Product.objects.values_list('id','name'))
     class Meta:
         model = CardProduct
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
         super(CardProductAdminForm, self).__init__(*args, **kwargs)
-        self.fields["child"].initial = [o for o in self.instance.child.all().values_list('id', flat=True)]
+        #self.fields["child"].initial = [o for o in self.instance.child.all().values_list('id', flat=True)]
 
 
 class CardProductAdmin(DynamicRawIDMixin, admin.ModelAdmin):
