@@ -18,6 +18,7 @@ def load_env(path: Path):
     >>>
     """
     if not path.exists():
+        print('path not exist')
         return
 
     path = path.resolve()
@@ -26,7 +27,7 @@ def load_env(path: Path):
         raise FilePermissionError(f"Insecure environment file permissions for {path}! Make it 600")
 
     content = path.read_text()
-
+    print(path)
     for line in content.split('\n'):
         line = line.strip()
 
